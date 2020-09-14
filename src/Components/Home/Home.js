@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Modal from '../Modal/Modal'
 
 const Home = () => {
 
+    const modalRef = useRef()
+
     const openModal = () => {
-        console.log('Open Modal')
+        // console.log(modalRef.current)
+        modalRef.current.openModal()
     }
+
     return (
         <>
             <a id="home"></a>
@@ -40,7 +44,10 @@ const Home = () => {
                 <a href="#about" style={{marginRight: 4 +"px"}} className="waves-effect waves-light btn-large blue" data-aos="fade-right">About</a>
                 <a className="waves-effect waves-light btn-large green accent-4" data-aos="fade-left" onClick={openModal}>Register</a>
             </div>
-            <Modal />
+            <Modal ref={modalRef}>
+                <h1>Modal Header</h1>
+                <p>Lorem ipsum</p>
+            </Modal>
         </>
     )
 }
