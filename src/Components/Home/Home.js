@@ -1,6 +1,11 @@
 import React from 'react'
+import Modal from '../Modal/Modal'
 
 const Home = () => {
+
+    const openModal = () => {
+        console.log('Open Modal')
+    }
     return (
         <>
             <a id="home"></a>
@@ -33,8 +38,9 @@ const Home = () => {
             <div className="title">
                 <span className="subtitle  white-text"><h2 data-aos="fade-down">RSL LOGISTIC</h2></span><br/>
                 <a href="#about" style={{marginRight: 4 +"px"}} className="waves-effect waves-light btn-large blue" data-aos="fade-right">About</a>
-                <a className="waves-effect waves-light btn-large green accent-4" data-aos="fade-left">Register</a>
+                <a className="waves-effect waves-light btn-large green accent-4" data-aos="fade-left" onClick={openModal}>Register</a>
             </div>
+            <Modal />
         </>
     )
 }
