@@ -1,46 +1,37 @@
-import React, { useState } from 'react'
-import "./RegisterForm.css"
-// import { Link } from 'react-router-dom'
+import React from 'react'
+import './RegisterForm.css'
+import useForm from './useForm'
+import validateInfo from './validateInfo'
 
 const RegisterForm = () => {
 
-    const [ data, setData ] = useState({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
-    })
+    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateInfo)
 
-    const handleChange = (e) => {
-        // console.log(e.target.value)
-        setData({
-            ...data,
-            [e.target.name] : e.target.value
-        })
+    function submit() {
+        console.log('Submitted Succefully')
     }
 
-    const onSubmit = (e) => {
-        e.preventDefault()
-        console.log(data.name + '\n' + data.email + '\n' + data.password + '\n' + data.confirmPassword)
-    }
-    
     return (
-        <div className="container">
-            <div className="register box">
-                <h1>Register</h1>
-                <div className="register-form">
-                    <form onSubmit={onSubmit}>
-                        <input type="text" name="name" placeholder="Name" onChange={handleChange} />
-                        <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-                        <input type="tel" name="phone" placeholder="Phone number" onChange={handleChange} />
-                        <input type="password" name="password" placeholder="Password" onChange={handleChange} />
-                        <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} />
-                        <div className="btn-alongside">
-                            <button className="btn-ghost" type="submit">Sing Up</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+        <div className="register box">
+            <h1>Register</h1>
+            <form onSubmit={handleSubmit} noValidate >
+                <input type="text" name="name" value={values.name} placeholder="Name" onChange={handleChange} />
+                {errors.name && <p>{errors.name}</p>}
+
+                <input type="email" name="email" value={values.email} placeholder="Email" onChange={handleChange} />
+                {errors.email && <p>{errors.email}</p>}
+
+                <input type="tel" name="phone" value={values.phone} placeholder="Phone number" onChange={handleChange} />
+                {errors.phone && <p>{errors.phone}</p>}
+
+                <input type="password" name="password" value={values.password} placeholder="Password" onChange={handleChange} />
+                {errors.password && <p>{errors.password}</p>}
+
+                <input type="password" name="confirmPassword" value={values.confirmPassword} placeholder="Confirm password" onChange={handleChange} />
+                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+
+                <button type="submit" >Sing Up</button>
+            </form>
         </div>
     )
 }
