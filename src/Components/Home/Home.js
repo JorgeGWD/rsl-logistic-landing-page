@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import Modal from '../Modal/Modal'
+import RegisterForm from '../RegisterForm/RegisterForm'
 
 const Home = () => {
 
@@ -45,8 +46,7 @@ const Home = () => {
                 <a className="waves-effect waves-light btn-large green accent-4" data-aos="fade-left" onClick={openModal}>Register</a>
             </div>
             <Modal ref={modalRef}>
-                <h1>Modal Header</h1>
-                <p>Lorem ipsum</p>
+                <RegisterForm />
             </Modal>
         </>
     )
