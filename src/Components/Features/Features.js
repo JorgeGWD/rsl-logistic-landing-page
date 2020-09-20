@@ -4,7 +4,7 @@ const Features = () => {
     return (
         <div className="container">
 			<div className="row">			
-				<a id="freatures" className="line"><h4 className="margin h1" data-aos="zoom-out" data-aos-duration="500">Services</h4></a>
+				<a href="jsx-a11y/anchor-is-valid" id="freatures" className="line"><h4 className="margin h1" data-aos="zoom-out" data-aos-duration="500">Services</h4></a>
 				<div className="col s12 m4">
 		        	<div className="icon-block">
 		            	<h2 className="center light-blue-text"><i className="material-icons" data-aos="zoom-in-down" data-aos-duration="500">settings</i></h2>

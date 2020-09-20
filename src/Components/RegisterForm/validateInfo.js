@@ -25,7 +25,7 @@ export default function validateInfo(values) {
 
     if(!values.confirmPassword) {
         errors.confirmPassword = 'Este campo es requerido'
-    } else if(values.confirmPassword != values.password) {
+    } else if(values.confirmPassword !== values.password) {
         errors.confirmPassword = 'La contraseña no coincide'
     }
 

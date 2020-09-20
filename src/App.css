@@ -1,0 +1,12 @@
+#home {
+    display: none;
+}
+
+ul#nav-mobile li {
+    margin: 0px 5px;
+}
+
+ul#nav-mobile li button {
+    border: none;
+    background: transparent;
+}
