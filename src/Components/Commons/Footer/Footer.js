@@ -35,13 +35,6 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col s12">
-                    </div>
-                </div>
-            </div>
         </>
     )
 }

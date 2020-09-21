@@ -18,6 +18,9 @@ const RegisterForm = () => {
                 <input type="text" name="name" value={values.name} placeholder="Name" onChange={handleChange} />
                 {errors.name && <p>{errors.name}</p>}
 
+                <input type="text" name="lastName" value={values.lastName} placeholder="Last name" onChange={handleChange} />
+                {errors.lastName && <p>{errors.lastName}</p>}
+
                 <input type="email" name="email" value={values.email} placeholder="Email" onChange={handleChange} />
                 {errors.email && <p>{errors.email}</p>}
 

@@ -4,6 +4,7 @@ const useForm = (callback, validateInfo) => {
 
     const [ values, setValues ] = useState({
         name: '',
+        lastName: '',
         email: '',
         phone: '',
         password: '',

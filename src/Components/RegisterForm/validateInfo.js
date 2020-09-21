@@ -5,6 +5,10 @@ export default function validateInfo(values) {
         errors.name = "Este campo es requerido"
     }
 
+    if(!values.lastName) {
+        errors.lastName = "Este campo es requerido"
+    }
+
     if(!values.email) {
         errors.email = 'Este campo es requerido'
     } else if(!/\S+@\S+\.\S+/.test(values.email)) {
