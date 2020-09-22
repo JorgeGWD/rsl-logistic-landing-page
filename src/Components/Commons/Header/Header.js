@@ -1,14 +1,21 @@
 import React, { useRef } from 'react'
+import LoginForm from '../../LoginForm/LoginForm'
 import Modal from '../../Modal/Modal'
 import RegisterForm from '../../RegisterForm/RegisterForm'
 
 const Header = () => {
 
-    const modalRef = useRef()
+    const modalRefRegister = useRef()
+    const modalRefLogin = useRef()
 
-    const openModal = () => {
+    const openModalRegister = () => {
         // console.log(modalRef.current)
-        modalRef.current.openModal()
+        modalRefRegister.current.openModal()
+    }
+
+    const openModalLogin = () => {
+        // console.log(modalRef.current)
+        modalRefLogin.current.openModal()
     }
 
     return (
@@ -24,16 +31,19 @@ const Header = () => {
                                 <li><a href="#contact">Contact</a></li>
                             </ul>
                             <ul id="nav-mobile" className="right hide-on-med-and-down">
-                                <li><button href="jsx-a11y/anchor-is-valid">Login</button></li>
+                                <li><button href="jsx-a11y/anchor-is-valid" onClick={openModalLogin}>Login</button></li>
                                 <li>|</li>
-                                <li><button href="jsx-a11y/anchor-is-valid" onClick={openModal}>Register</button></li>
+                                <li><button href="jsx-a11y/anchor-is-valid" onClick={openModalRegister}>Register</button></li>
                             </ul>
                         </div>
                     </div>
                 </nav>
             </div>
-            <Modal ref={modalRef}>
+            <Modal ref={modalRefRegister}>
                 <RegisterForm />
+            </Modal>
+            <Modal ref={modalRefLogin}>
+                <LoginForm />
             </Modal>
         </div>
     )

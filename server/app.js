@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -36,12 +36,6 @@ app.post('/register', (req, res) => {
     const phone = req.body.Telefono;
     const password = req.body.Contrasena;
 
-    /*db.query('INSERT INTO usuario (Nombre, Apellido, Email, Telefono, Contrasena) VALUES (?,?,?,?,?)',
-    [name, lastName, email, phone, password],
-    (err, results) => {
-        console.log(err);
-    });*/
-
     db.query('SELECT Email FROM usuario WHERE Email = ?', [email], async (error, results) => {
         if (error) {
             console.log(error);
@@ -57,10 +51,12 @@ app.post('/register', (req, res) => {
 
         // console.log(hashedPassword);
 
-        db.query('INSERT INTO usuario SET ?', {Nombre: name, Apellido: lastName, Email: email, Telefono: phone, Contrasena: hashedPassword}, (error, result) => {
+        db.query('INSERT INTO usuario SET ?', {Nombre: name, Apellido: lastName, Email: email, Telefono: phone, Contrasena: hashedPassword}, (error, results) => {
             if (error) {
                 console.log(error)
             } else {
+                console.log('Registro exitoso')
+                console.log(results)
                 return res.render('/', {
                     message: 'Registro exitoso'
                 })

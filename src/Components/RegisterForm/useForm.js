@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Axios from 'axios'
 
 const useForm = (callback, validateInfo) => {
 
@@ -10,6 +11,18 @@ const useForm = (callback, validateInfo) => {
         password: '',
         confirmPassword: ''
     })
+
+    const register = () => {
+        Axios.post('http://localhost:5000/register', {
+            Nombre: values.name,
+            Apellido: values.lastName,
+            Email: values.email,
+            Telefono: values.phone,
+            Contrasena: values.password
+        }).then((response) => {
+            console.log(response)
+        })
+    }
 
     const [ errors, setErrors ] = useState({})
 
@@ -31,7 +44,7 @@ const useForm = (callback, validateInfo) => {
 
         setErrors(validateInfo(values))
         setIsSunmitting(true)
-        //callback()
+        // callback()
     }
 
     useEffect(() => {
@@ -44,7 +57,8 @@ const useForm = (callback, validateInfo) => {
         handleChange,
         handleSubmit,
         values,
-        errors
+        errors,
+        register
     }
 
 }

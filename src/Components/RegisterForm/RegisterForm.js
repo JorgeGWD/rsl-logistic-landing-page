@@ -5,10 +5,10 @@ import validateInfo from './validateInfo'
 
 const RegisterForm = () => {
 
-    const { handleChange, handleSubmit, values, errors } = useForm(submit, validateInfo)
+    const { handleChange, handleSubmit, values, errors, register } = useForm(submit, validateInfo)
 
     function submit() {
-        console.log('Submitted Succefully')
+        console.log(values)
     }
 
     return (
@@ -33,7 +33,7 @@ const RegisterForm = () => {
                 <input type="password" name="confirmPassword" value={values.confirmPassword} placeholder="Confirm password" onChange={handleChange} />
                 {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
 
-                <button type="submit" >Sing Up</button>
+                <button type="submit" onClick={register} >Sing Up</button>
             </form>
         </div>
     )
