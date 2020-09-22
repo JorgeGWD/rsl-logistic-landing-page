@@ -1,30 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './LoginForm.css'
+import useForm from './useForm'
+import validateInfo from './validateInfo'
 
 const LoginForm = () => {
-    
-    const [ values, setValues ] = useState({
-        email: '',
-        password: '',
-    })
 
-    const handleChange = (e) => {
-        // console.log(e.target.value)
+    const { handleChange, handleSubmit, values, errors, login } = useForm(submit, validateInfo)
 
-        const { name, value } = e.target
-
-        setValues({
-            ...values,
-            [name] : value
-        })
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        //setErrors(validateInfo(values))
-        //setIsSunmitting(true)
-        // callback()
+    function submit() {
+        console.log(values)
     }
 
     return (
@@ -32,12 +16,12 @@ const LoginForm = () => {
             <h1>Login</h1>
             <form onSubmit={handleSubmit} noValidate >
                 <input type="email" name="email" value={values.email} placeholder="Email" onChange={handleChange} />
-                {/*errors.email && <p>{errors.email}</p>*/}
+                {errors.email && <p>{errors.email}</p>}
 
                 <input type="password" name="password" value={values.password} placeholder="Password" onChange={handleChange} />
-                {/*errors.password && <p>{errors.password}</p>*/}
+                {errors.password && <p>{errors.password}</p>}
 
-                <button type="submit" onClick={""/*login*/} >Sing Up</button>
+                <button type="submit" onClick={login} >Sing In</button>
             </form>
         </div>
     )
