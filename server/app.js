@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
@@ -31,84 +31,36 @@ db.connect((error) => {
 });
 
 app.post('/register', (req, res) => {
+    console.log(req.body);
 
-    const name = req.body.Nombre;
-    const lastName = req.body.Apellido;
-    const email = req.body.Email;
-    const phone = req.body.Telefono;
-    const password = req.body.Contrasena;
+    const {name, lastName, email, phone, password} = req.body;
 
-    db.query('SELECT Email FROM usuario WHERE Email = ?', [email], async (error, results) => {
+    db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
         if (error) {
-            console.log(error);
+            console.log(error)
         };
         if (results.length > 0) {
-            console.log('El correo ya esta en uso')
-            return res.render('/', {
-                message: 'El correo ya esta en uso'
-            })
+            console.log('El email esta en uso');
+            return res.status(200).json({
+                message: 'El email esta en uso'
+            });
         };
 
         let hashedPassword = await bcrypt.hash(password, 8);
+        console.log(hashedPassword);
 
-        // console.log(hashedPassword);
-
-        db.query('INSERT INTO usuario SET ?', {Nombre: name, Apellido: lastName, Email: email, Telefono: phone, Contrasena: hashedPassword}, (error, results) => {
+        db.query('INSERT INTO users SET ?', {name: name, lastName: lastName, email: email, phone: phone, password: hashedPassword}, (error, results) => {
             if (error) {
-                console.log(error)
+                console.log(error);
             } else {
-                console.log('Registro exitoso')
-                console.log(results)
-                return res.render('/', {
+                console.log(results);
+                console.log('Registro exitoso');
+                return res.status(200).json({
                     message: 'Registro exitoso'
-                })
+                });
             }
         })
-
-    });
-
-});
-
-app.post('/login', (req, res) => {
-
-    try {
-        const email = req.body.Email;
-        const password = req.body.Contrasena;
-
-        if (!email || !password) {
-            return res.status(400).render('/', {
-                message: 'Email y contraseña requeridos'
-            })
-        }
-
-        db.query('SELECT * FROM usuario WHERE Email = ?', [email], async (error, results) => {
-            console.log(results)
-            if(!results || !(await bcrypt.compare(password, results[0].password))) {
-                res.status(401).render('/', {
-                    message: 'El email o la contraseña es incorrecta'
-                })
-            } else {
-                const id = results[0].req.body.idUsuario;
-
-                const token = jwt.sign({id}, process.env.JWT_SECRET, {
-                    expiresIn: process.env.JWT_EXPIRES_IN
-                })
-                console.log('The token is: '+ token)
-
-                const cookieOptions = {
-                    expires: new Date(
-                        Date.now() + process.env.JWT_COOKIE_EXPIRES * 20 * 60 * 60 * 1000
-                    ),
-                    httpOnly: true
-                }
-                res.cookie('jwt', token, cookieOptions);
-                res.status(200).redirect('/');
-            }
-        })
-
-    } catch (error) {
-        console.log(error);
-    }
+    })
 
 });
 

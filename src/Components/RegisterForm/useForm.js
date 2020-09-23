@@ -14,11 +14,11 @@ const useForm = (callback, validateInfo) => {
 
     const register = () => {
         Axios.post('http://localhost:5000/register', {
-            Nombre: values.name,
-            Apellido: values.lastName,
-            Email: values.email,
-            Telefono: values.phone,
-            Contrasena: values.password
+            name: values.name,
+            lastName: values.lastName,
+            email: values.email,
+            phone: values.phone,
+            password: values.password
         }).then((response) => {
             console.log(response)
         })
