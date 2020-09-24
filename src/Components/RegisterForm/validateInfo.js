@@ -15,10 +15,14 @@ export default function validateInfo(values) {
         errors.email = 'Email invalido'
     }
 
-    if(!values.phone) {
+    /*if(!values.phone) {
         errors.phone = "Este campo es requerido"
     } else if(!/^\+?([0-9]{2})\)?[- ]?([0-9]{3})[- ]?([0-9]{7})$/.test(values.phone)) {
         errors.phone = "Numero de teléfono invalido"
+    }*/
+
+    if(!values.phone) {
+        errors.phone = "Este campo es requerido"
     }
 
     if(!values.password) {
