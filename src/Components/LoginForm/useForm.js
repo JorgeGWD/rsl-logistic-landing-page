@@ -10,8 +10,8 @@ const useForm = (callback, validateInfo) => {
 
     const login = () => {
         Axios.post('http://localhost:5000/login', {
-            Email: values.email,
-            Contrasena: values.password
+            email: values.email,
+            password: values.password
         }).then((response) => {
             console.log(response)
         })
